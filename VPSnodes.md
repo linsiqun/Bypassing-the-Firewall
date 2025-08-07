@@ -99,6 +99,7 @@ Scheduled Reboot
 Installation and Update
 
 **A.Installing from the Source Website (Recommended)**
+https://github.com/nikkinikki-org/OpenWrt-nikki/blob/main/README.zh.md
 
 
 # Run only once
@@ -110,6 +111,7 @@ wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/fe
 
 **You can install via shell commands or the LuCI "Package" menu**
 
+
 # Install opkg
 
 opkg install nikki
@@ -118,8 +120,8 @@ opkg install luci-app-nikki
 
 opkg install luci-i18n-nikki-zh-cn
 
-# Install apk
 
+# for apk
 apk add nikki
 
 apk add luci-app-nikki
@@ -127,15 +129,15 @@ apk add luci-app-nikki
 apk add luci-i18n-nikki-zh-cn
 
 
+
 **B. Install from the distribution website**
 
 wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/install.sh | ash
 
-Uninstall and reset
+
+**Uninstall and reset**
 
 wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/uninstall.sh | ash
-
-Compile command
 
 
 # Add repository
