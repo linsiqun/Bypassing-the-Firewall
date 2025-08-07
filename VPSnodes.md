@@ -1,280 +1,252 @@
-# **Release port**
+# **Router Deployment OP Installation Firmware**
 
 
-ufw allow 80   #Very important
+a. https://firmware-selector.immortalwrt.org/  #Download the ImmortalWrt firmware for your device
 
+b. https://github.com/jerrykuku/luci-theme-argon/  #New OpenWrt LuCI theme
 
+c. https://github.com/xiaorouji/openwrt-passwall/releases/  #passwall
 
-ufw allow 443   #Very important
+d. https://github.com/vernesong/OpenClash?tab=readme-ov-file/  #openclash
 
+e. https://github.com/nikkinikki-org/OpenWrt-nikki/blob/main/README.zh.md  #nikki
 
 
-firewall-cmd --zone=public --add-port=Port number/tcp - Port number      #Release port1
+**1. To install all other package definitions, run: command**
 
+(After installing the original OpenWrt version)
 
+./scripts/feeds update luci
 
-iptables -A INPUT -p tcp --dport Port number -j ACCEPT     #Release port2
+./scripts/feeds install -a -p luci
 
 
+# **passwall**
 
-ufw allow Port number     #Release port3
+**2. Restart OpenWrt and refresh the software package**
 
+1. Go to https://github.com/xiaorouji/openwrt-passwall/releases/passwall
 
----------
+2. Go to https://github.com/xiaorouji/openwrt-passwall2/releases/passwall2
 
+Download luci-19.07\_luci-app-passwall\_25.7.4-1\_all.ipk, rename it to luci-app-passwall\_all.ipk, upload and install.
 
-# **Turn off the firewall**
+Download luci-19.07\_luci-i18n-passwall-zh-cn\_25.7.4-1\_all.ipk, rename it to luci-i18n-passwall-zh-cn\_all.ipk, upload and install.
 
 
-systemctl stop firewalld.service    #Turn off the firewall1
+# **openClash**
 
+**3. Restart OpenWrt**
 
+Please install these dependencies first.
 
-service iptables stop   #Turn off the firewall2
 
+**Deployment Command**
 
 
-ufw disable    #Turn off the firewall3
+**#iptables**
 
+opkg update
+opkg install bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base
+opkg install /tmp/openclash.ipk
 
-=========
+apk update
+apk add bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base
+apk add -q --force-overwrite --clean-protected --allow-untrusted /tmp/openclash.apk
 
 
-# **Midway deployment-build one-click script**
+**#nftables**
 
+opkg update
+opkg install bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base
+opkg install /tmp/openclash.ipk
 
-Update the system
+apk update
+apk add bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base
+apk add -q --force-overwrite --clean-protected --allow-untrusted /tmp/openclash.apk
 
 
-apt update -y \&\& apt install curl sudo wget git -y    #Debian/Ubuntu system
 
+Install the above dependencies in order, installing each dependency separately.
 
+https://github.com/vernesong/OpenClash/releases
 
-yum install screen   #centos system
+4.Next, download luci-app-openclash_0.46.115_all.ipk, rename it to luci-app-openclash_all.ipk, and upload it for installation.
 
 
+# **nikki**
+Deployment Requirements
 
-apt-get install wget     #wget system
+OpenWrt 23.05 or later
 
+Linux kernel 5.13 or later
 
+Firewall4 Version
 
-wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.0/gost-linux-amd64-2.11.0.gz \&\& gzip -d gost-linux-amd64-2.11.0.gz     #[Deploy one-click script midway]
 
+**Features**
 
-wget --no-check-certificate -O gost.sh https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh \&\& chmod +x gost.sh \&\& ./gost.sh     #[Deploy the final script code]
+Transparent proxy (redirect/TPROXY/TUN, IPv4 and/or IPv6)
 
+Access Control
 
+Configuration File Mixing
 
-The router client replaces the transfer machine IP address and port
+Configuration File Editor
 
+Scheduled Reboot
 
+Installation and Update
 
-mv gost-linux-amd64-2.11.0 gost      #Named gost
+**A.Installing from the Source Website (Recommended)**
 
 
+# Run only once
 
-chmod +x gost      #Add executable permissions to the gost file
 
+**Installation Commands**
 
+wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/feed.sh | ash
 
-./gost -L udp://:38420 -L tcp://:38420 -F relay+tls://Terminal:33280 >> /dev/null 2>\&1 \&    #Midway replacement code
+**You can install via shell commands or the LuCI "Package" menu**
 
+# Install opkg
 
-./gost -L relay+tls://:8888/To add the of the Terminal server code:443 >> /dev/null 2>\&1 \&    #Terminal replacement code 
+opkg install nikki
 
+opkg install luci-app-nikki
 
+opkg install luci-i18n-nikki-zh-cn
 
-./gost.sh       #Management script commands
+# Install apk
 
+apk add nikki
 
-=========
+apk add luci-app-nikki
 
+apk add luci-i18n-nikki-zh-cn
 
-# **Transfer midway One-click installation of Nodepass panel 2025**
 
-Preparation
+**B. Install from the distribution website**
 
-Prepare two VPSs: one for the intermediate server and one for the terminal server.
+wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/install.sh | ash
 
-Deploy the corresponding nodes on the terminal server in advance. Install the 3X-UI panel on the terminal server in advance.
+Uninstall and reset
 
-Set up domain name resolution for the intermediate server and the terminal server in advance.
+wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/uninstall.sh | ash
 
+Compile command
 
-1、Apply for an SSL certificate with one click：【https://github.com/slobys/docker】
 
+# Add repository
 
-bash <(curl -fsSL https://raw.githubusercontent.com/slobys/SSL-Renewal/main/acme.sh)    #Deployment Commands
+echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
 
+# Update and install repository
 
+./scripts/feeds update -a
 
-2、Open Source Projects Nodepass：【https://github.com/yosebyte/nodepass】
+./scripts/feeds install -a
 
-Nodepass Panel Project：【https://github.com/NodePassProject/npsh】
+# Compile
 
+make package/luci-app-nikki/compile
 
+The compiled results can be found in bin/packages/your_architecture/nikki.
 
-A. Main program installation [Mid-range and terminal installation]
+Dependency deployment
 
+ca-bundle
 
-bash <(wget -qO- https://run.nodepass.eu/np.sh)    #Deployment Commands
+curl
 
+yq
 
+firewall4
 
-B. Deploy Nodepass Panel [Mid-range terminal installation]
+ip-full
 
+kmod-inet-diag
 
-bash <(wget -qO- https://run.nodepass.eu/dash.sh)    #Deployment Commands
+kmod-nft-socket
 
+kmod-nft-tproxy
 
+kmod-tun
 
-One-click installation script [ terminal installation selection]
 
+# OpenWrt LuCI Theme
 
-bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)    #3X-UI one-click installation panel
 
+5. https://github.com/jerrykuku/luci-theme-argon/ **Brand new OpenWrt LuCI theme**
 
-bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh)    #Sing-Box One-click script
 
+**Deployment Commands** # opkg
 
+opkg update    #Refresh the package source
 
-4、The router client replaces the transfer machine IP address and port
 
+opkg install pkg    #Install a specific package
 
-=========
 
-# **Midway one-click installation of Aurora Panel 2025**
 
+opkg remove pkg    #Uninstall a specific package
 
-ufw disable    #Turn off the firewall
 
+**Deployment Commands** # apk
 
+apk update   #Refresh the package source
 
-bash <(curl -fsSL https://raw.githubusercontent.com/Aurora-Admin-Panel/deploy/main/install.sh)    #One-click installation of Aurora panel midway
 
+apk add pkg   #Install a specific package
 
 
-The router client replaces the transfer machine IP address and port
+apk del pkg   #Uninstall a specific package
 
 
-=========
+**Chained Deployment Commands** 
 
+xmlCopy
 
-# **Trojan Panel Installation Panel**
+$\&nbsp;opkg\&nbsp;update\&nbsp;\&\&\&nbsp;opkg\&nbsp;install\&nbsp;dnsmasq-full
 
-apt update -y     #Update the system
+$\&nbsp;apk\&nbsp;--update-cache\&nbsp;add\&nbsp;dnsmasq-full
 
 
 
-apt-get install ca-certificates wget -y \&\& update-ca-certificates   #Update the system's root certificate
+opkg install luci-compat
 
+opkg install luci-lib-ipkg
 
+wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.4.3/luci-theme-argon-2.4.3-r20250722.apk opkg install luci-theme-argon\*.ipk
 
-wget -O tcp.sh "https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh" \&\& chmod +x tcp.sh \&\& ./tcp.sh    #Enable BBR acceleration
 
 
-source <(curl -L https://github.com/trojanpanel/install-script/raw/main/install\_script.sh)     #Trojan Panel Installation Panel
+from https://github.com/jerrykuku/luci-app-argon-config/releases/ Next, download luci-i18n-argon-config-zh-cn_git-22.114.24542-d1474ba_all.ipk Rename it to luci-i18n-argon-config-cn.ipk and upload it for installation.
 
+from https://github.com/jerrykuku/luci-theme-argon/releases/ Next, download luci-theme-argon-2.4.3-r20250722.apk , rename it to luci-theme-argon.apk and upload it for installation.
 
 
-Default login account: sysadmin Default login password: 123456
+# deployment commands
 
+\# Enter the kernel installation directory
 
-Recommended installation order: Trojan Panel Backend > Trojan Panel Frontend -> Trojan Panel Cor
+cd /etc/openclash/core/clash\_meta
 
 
-=========
 
+\# Download the kernel installation package
 
-# **One-click installation of Sing-Box panel**
+wget https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/smart/clash-linux-amd64-v1.tar.gz
 
 
-bash <(curl -fsSL https://raw.githubusercontent.com/slobys/SSL-Renewal/main/acme.sh)      #Apply for an SSL certificate with one click
 
+\# Unzip the kernel installation package
 
+tar -zxvf clash-linux-amd64-v1.tar.gz
 
-bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh)      #One-click installation of Sing-Box and Xray panels
 
 
-----------------
+\#Grant highest authority
 
-
-# **sb one-click deployment builds sing-box script**
-
-
-sudo ufw disable    #Turn off the firewall
-
-
-
-bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh)   #sb one-key script
-
-
-=========
-
-
-# **Install x-ui panel**
-
-
-ufw disable    #Turn off the firewall
-
-
-
-bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)      #Install x-ui panel
-
-
-=========
-
-
-# **Install 3x-ui panel**
-
-
-3X-UI open source project address: https://github.com/MHSanaei/3x-ui
-
-
-
-Download and install the SSH connection tool Finalshell：https://www.hostbuf.com/t/988.html
-
-
-
-Server: 1-core, 1G 4T Debian system
-
-
-1. First, update the Debian/Ubuntu system and install components.
-
-
-apt update -y \&\& apt install curl sudo wget git -y
-
-
-
-2. One-click installation script
-
-
-bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
-
-
-3. Apply for an SSL certificate (disable the firewall (sudo ufw disable)/allow access to port 80 (ufw allow 80) for the certificate application to succeed).
-
-
-4. Configure the node (Important: If the node cannot access the internet, remember to allow access to the node port.)
-
-
-
-①vless+grpc+reality  80
-
-
-②vless+tcp+reality
-
-
-②vless+xhttp+reality
-
-
-③vless+ws+tls  443
-
-
-④vless+tcp+tls
-
-
-5. Enable BBR
-
-
-==================================
+chmod 777 clash
