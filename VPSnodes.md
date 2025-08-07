@@ -9,7 +9,7 @@ ufw allow 443   #Very important
 
 
 
-firewall-cmd --zone=public --add-port=Port number/tcp --permanent      #Release port1
+firewall-cmd --zone=public --add-port=Port number/tcp - Port number      #Release port1
 
 
 
@@ -40,7 +40,7 @@ ufw disable    #Turn off the firewall3
 =========
 
 
-# **Transit deployment-build one-click script**
+# **Midway deployment-build one-click script**
 
 
 Update the system
@@ -58,11 +58,10 @@ apt-get install wget     #wget system
 
 
 
-wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.0/gost-linux-amd64-2.11.0.gz \&\& gzip -d gost-linux-amd64-2.11.0.gz     #Transfer one-click script midway
+wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.0/gost-linux-amd64-2.11.0.gz \&\& gzip -d gost-linux-amd64-2.11.0.gz     #[Deploy one-click script midway]
 
 
-
-wget --no-check-certificate -O gost.sh https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh \&\& chmod +x gost.sh \&\& ./gost.sh     #Terminal One-click scripting
+wget --no-check-certificate -O gost.sh https://raw.githubusercontent.com/KANIKIG/Multi-EasyGost/master/gost.sh \&\& chmod +x gost.sh \&\& ./gost.sh     #[Deploy the final script code]
 
 
 
@@ -78,11 +77,10 @@ chmod +x gost      #Add executable permissions to the gost file
 
 
 
-./gost -L udp://:38420 -L tcp://:38420 -F relay+tls://Terminal:33280 >> /dev/null 2>\&1 \&     #script midwayTransfer  server code
+./gost -L udp://:38420 -L tcp://:38420 -F relay+tls://Terminal:33280 >> /dev/null 2>\&1 \&    #Midway replacement code
 
 
-
-./gost -L relay+tls://:8888/To add the of the Terminal server code:443 >> /dev/null 2>\&1 \&       #Terminal scripting server code
+./gost -L relay+tls://:8888/To add the of the Terminal server code:443 >> /dev/null 2>\&1 \&    #Terminal replacement code 
 
 
 
@@ -106,7 +104,7 @@ Set up domain name resolution for the intermediate server and the terminal serve
 1、Apply for an SSL certificate with one click：【https://github.com/slobys/docker】
 
 
-bash <(curl -fsSL https://raw.githubusercontent.com/slobys/SSL-Renewal/main/acme.sh)    #命令
+bash <(curl -fsSL https://raw.githubusercontent.com/slobys/SSL-Renewal/main/acme.sh)    #Deployment Commands
 
 
 
@@ -119,14 +117,14 @@ Nodepass Panel Project：【https://github.com/NodePassProject/npsh】
 A. Main program installation [Mid-range and terminal installation]
 
 
-bash <(wget -qO- https://run.nodepass.eu/np.sh)    #Order
+bash <(wget -qO- https://run.nodepass.eu/np.sh)    #Deployment Commands
 
 
 
 B. Deploy Nodepass Panel [Mid-range terminal installation]
 
 
-bash <(wget -qO- https://run.nodepass.eu/dash.sh)    #Order
+bash <(wget -qO- https://run.nodepass.eu/dash.sh)    #Deployment Commands
 
 
 
@@ -162,7 +160,7 @@ The router client replaces the transfer machine IP address and port
 =========
 
 
-# **Installing Trojan Panel**
+# **Trojan Panel Installation Panel**
 
 apt update -y     #Update the system
 
@@ -175,7 +173,7 @@ apt-get install ca-certificates wget -y \&\& update-ca-certificates   #Update th
 wget -O tcp.sh "https://github.com/ylx2016/Linux-NetSpeed/raw/master/tcp.sh" \&\& chmod +x tcp.sh \&\& ./tcp.sh    #Enable BBR acceleration
 
 
-source <(curl -L https://github.com/trojanpanel/install-script/raw/main/install\_script.sh)     #Installing Trojan Panel
+source <(curl -L https://github.com/trojanpanel/install-script/raw/main/install\_script.sh)     #Trojan Panel Installation Panel
 
 
 
