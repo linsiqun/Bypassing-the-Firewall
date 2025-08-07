@@ -189,8 +189,8 @@ opkg update    #Refresh the package source
 opkg install pkg    #Install a specific package
 
 
-
 opkg remove pkg    #Uninstall a specific package
+
 
 
 **Deployment Commands** # apk
@@ -204,27 +204,38 @@ apk add pkg   #Install a specific package
 apk del pkg   #Uninstall a specific package
 
 
-**Chained Deployment Commands** 
+# Deployment Commands
 
-xmlCopy
+
+**xmlCopy** 
 
 $\&nbsp;opkg\&nbsp;update\&nbsp;\&\&\&nbsp;opkg\&nbsp;install\&nbsp;dnsmasq-full
 
 $\&nbsp;apk\&nbsp;--update-cache\&nbsp;add\&nbsp;dnsmasq-full
 
 
+**Install for OpenWrt official SnapShots and ImmortalWrt** 
 
 opkg install luci-compat
-
 opkg install luci-lib-ipkg
+wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.3.2/luci-theme-argon_2.3.2-r20250207_all.ipk
+opkg install luci-theme-argon*.ipk
 
-wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v2.4.3/luci-theme-argon-2.4.3-r20250722.apk opkg install luci-theme-argon\*.ipk
+
+**Install luci-app-argon-config** 
+
+wget --no-check-certificate -O luci-app-argon-config_0.9_all.ipk https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.ipk
+opkg install luci-app-argon-config*.ipk
+
+wget --no-check-certificate -O luci-app-argon-config_0.9_all.ipk https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.apk
+opkg install luci-app-argon-config*.apk
 
 
+# Skin Download
 
-from https://github.com/jerrykuku/luci-app-argon-config/releases/ Next, download luci-i18n-argon-config-zh-cn_git-22.114.24542-d1474ba_all.ipk Rename it to luci-i18n-argon-config-cn.ipk and upload it for installation.
+from  https://github.com/jerrykuku/luci-app-argon-config/releases/   Next, download luci-i18n-argon-config-zh-cn_git-22.114.24542-d1474ba_all.ipk Rename it to luci-i18n-argon-config-cn.ipk and upload it for installation.
 
-from https://github.com/jerrykuku/luci-theme-argon/releases/ Next, download luci-theme-argon-2.4.3-r20250722.apk , rename it to luci-theme-argon.apk and upload it for installation.
+from  https://github.com/jerrykuku/luci-theme-argon/releases/   Next, download luci-theme-argon-2.4.3-r20250722.apk , rename it to luci-theme-argon.apk and upload it for installation.
 
 
 # deployment commands
@@ -234,17 +245,14 @@ from https://github.com/jerrykuku/luci-theme-argon/releases/ Next, download luci
 cd /etc/openclash/core/clash\_meta
 
 
-
 \# Download the kernel installation package
 
 wget https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/smart/clash-linux-amd64-v1.tar.gz
 
 
-
 \# Unzip the kernel installation package
 
 tar -zxvf clash-linux-amd64-v1.tar.gz
-
 
 
 \#Grant highest authority
