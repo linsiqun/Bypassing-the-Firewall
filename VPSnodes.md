@@ -92,8 +92,7 @@ chmod +x gost      #给gost文件添加可执行权限
 =========
 
 
-**中转一键安装脚本面板2025**
-
+# **中转一键安装脚本面板2025**
 
 准备工作
 
@@ -151,8 +150,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-b
 
 =========
 
-
-**中转一键安装极光面板**
+# **中转一键安装极光面板2025**
 
 
 ufw disable    #关闭防火墙
@@ -169,8 +167,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/Aurora-Admin-Panel/deploy/ma
 =========
 
 
-**安装Trojan Panel面板**
-
+# **安装Trojan Panel面板**
 
 apt update -y     #更新系统
 
@@ -197,7 +194,7 @@ source <(curl -L https://github.com/trojanpanel/install-script/raw/main/install\
 =========
 
 
-**一键安装Sing-Box面板**
+# **一键安装Sing-Box面板**
 
 
 bash <(curl -fsSL https://raw.githubusercontent.com/slobys/SSL-Renewal/main/acme.sh)      #一键申请SSL证书
@@ -210,7 +207,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.s
 ----------------
 
 
-**sb一键搭建sing-box脚本**
+# **sb一键搭建sing-box脚本**
 
 
 sudo ufw disable    #关闭防火墙
@@ -223,7 +220,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-b
 =========
 
 
-**安装x-ui面板**
+# **安装x-ui面板脚本**
 
 
 ufw disable    #关闭防火墙
@@ -236,7 +233,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
 =========
 
 
-**安装3x-ui面板**
+# **安装3x-ui面板**
 
 
 3X-UI开源项目地址: https://github.com/MHSanaei/3x-ui
@@ -291,4 +288,4 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 5.启用 BBR
 
 
-==================================================================
+==================================
