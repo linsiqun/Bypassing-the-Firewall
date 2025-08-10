@@ -12,15 +12,19 @@ e. https://github.com/nikkinikki-org/OpenWrt-nikki/blob/main/README.zh.md  (nikk
 
 ## 安装OpenWrt原版之后以下命令
 
+
 ```shell
 ./scripts/feeds update luci
  ```
+
 
 ```shell
  ./scripts/feeds install -a -p luci
 ```
 
+
 # passwall
+
 
 ## 重启OpenWrt之后运行刷新软件包！
 
@@ -38,6 +42,7 @@ e. https://github.com/nikkinikki-org/OpenWrt-nikki/blob/main/README.zh.md  (nikk
 # 请先安装好这些依赖
 
 ## 以下命令
+
 
 ```shell
 #iptables
@@ -59,11 +64,14 @@ apk add bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-in
 apk add -q --force-overwrite --clean-protected --allow-untrusted /tmp/openclash.apk
 ```
 
+
 ## 依赖更新-命令
+
 
 ```shell
 opkg update
 ```
+
 
 ## 按顺序安装以上依赖，每个依赖单独安装
 
@@ -86,6 +94,7 @@ https://github.com/vernesong/OpenClash?tab=readme-ov-file   (openclash)
 
 1. 添加源
 
+
 ```shell
 # 只需运行一次
 wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/feed.sh | ash
@@ -93,8 +102,8 @@ wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/fe
 
 2. 安装
 
-```shell
 
+```shell
 # for opkg
 opkg install nikki
 opkg install luci-app-nikki
@@ -105,17 +114,22 @@ apk add luci-app-nikki
 apk add luci-i18n-nikki-zh-cn
 ```
 
+
 ### B. 从发行版安装
+
 
 ```shell
 wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/install.sh | ash
 ```
 
+
 ## 卸载并重置
+
 
 ```shell
 wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/uninstall.sh | ash
 ```
+
 
 ## 如何使用
 
@@ -133,6 +147,7 @@ wget -O - https://github.com/nikkinikki-org/OpenWrt-nikki/raw/refs/heads/main/un
 
 ## 编译
 
+
 ```shell
 # 添加源
 echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
@@ -142,6 +157,7 @@ echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >>
 # 编译
 make package/luci-app-nikki/compile
 ```
+
 
 编译结果可以在`bin/packages/your_architecture/nikki`内找到。
 
@@ -161,20 +177,24 @@ make package/luci-app-nikki/compile
 
 ## 链式-命令
 
+
 ```shell
 $\&nbsp;opkg\&nbsp;update\&nbsp;\&\&\&nbsp;opkg\&nbsp;install\&nbsp;dnsmasq-full
 $\&nbsp;apk\&nbsp;--update-cache\&nbsp;add\&nbsp;dnsmasq-full
-
 ```
 
+
 ## 安装 LuCI 18.06 (精益 LEDE )
+
 
 ```shell
 wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releases/download/v1.8.2/luci-theme-argon_1.8.2-20230609_all.ipk
 opkg install luci-theme-argon*.ipk
 ```
 
+
 ## 安装 OpenWrt 官方 SnapShots 和 ImmortalWrt
+
 
 ```shell
 opkg install luci-compat
@@ -183,12 +203,15 @@ wget --no-check-certificate https://github.com/jerrykuku/luci-theme-argon/releas
 opkg install luci-theme-argon*.ipk
 ```
 
+
 ## 安装 luci-app-argon-config
+
 
 ```shell
 wget --no-check-certificate -O luci-app-argon-config_0.9_all.ipk https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.ipk
 opkg install luci-app-argon-config*.ipk
 ```
+
 
 ## 上传安装
 
@@ -202,6 +225,7 @@ https://github.com/jerrykuku/luci-app-argon-config/releases/
 
 # openclash内核
 
+
 ```shell
 #进入内核安装目录 
 cd /etc/openclash/core/clash\_meta 
@@ -211,7 +235,4 @@ wget https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/smart/clash-
 tar -zxvf clash-linux-amd64-v1.tar.gz 
 #给予最高权限 
 chmod 777 clash 
-
 ```
-
-
