@@ -13,7 +13,7 @@ ufw allow 80   #非常重要
 ## 更新-以下命令
 
 ```shell
- apt update -y \&\& apt install curl sudo wget git -y    #Debian/Ubuntu系统 
+apt update -y && apt install curl sudo wget git -y    #Debian/Ubuntu系统 
 ```
 
 ```shell
